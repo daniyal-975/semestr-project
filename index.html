@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChessMind - AI Chess Analysis</title>
+
+    <meta name="description" content="Analyze your chess games, discover mistakes and improve your chess skills with ChessMind.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="#" class="logo">
+            ♟ ChessMind
+        </a>
+
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <a href="#analysis" class="nav-button">
+            Analyze Game
+        </a>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO SECTION -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="tag">
+                    YOUR PERSONAL CHESS COACH
+                </span>
+
+                <h1>
+                    Understand Every Move.
+                    <span>Master Every Game.</span>
+                </h1>
+
+                <p>
+                    Analyze your chess games, discover mistakes
+                    and improve your skills with ChessMind.
+                </p>
+
+                <a href="#analysis" class="main-button">
+                    Start Analysis →
+                </a>
+
+                <div class="stats">
+
+                    <div>
+                        <h3>AI</h3>
+                        <p>Smart analysis</p>
+                    </div>
+
+                    <div>
+                        <h3>24/7</h3>
+                        <p>Available anytime</p>
+                    </div>
+
+                    <div>
+                        <h3>100%</h3>
+                        <p>Focus on learning</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEMO CARD -->
+
+            <div class="hero-card">
+
+                <div class="card-top">
+
+                    <span>GAME PERFORMANCE</span>
+
+                    <span class="status">
+                        ● READY
+                    </span>
+
+                </div>
+
+                <div class="score">
+
+                    <h2>
+                        86<span>/100</span>
+                    </h2>
+
+                    <p>Example game score</p>
+
+                </div>
+
+                <div class="progress">
+                    <div></div>
+                </div>
+
+                <div class="performance">
+
+                    <div>
+                        <span>White accuracy</span>
+                        <strong>92.4%</strong>
+                    </div>
+
+                    <div>
+                        <span>Black accuracy</span>
+                        <strong>78.6%</strong>
+                    </div>
+
+                    <div>
+                        <span>Game result</span>
+                        <strong>1 - 0</strong>
+                    </div>
+
+                </div>
+
+                <p class="demo-note">
+                    Demo statistics. Not a real analysis.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME ANALYSIS SECTION -->
+
+        <section class="analysis-section" id="analysis">
+
+            <span class="tag">
+                CHESS ANALYSIS
+            </span>
+
+            <h2>Analyze Your Games</h2>
+
+            <p>
+                Connect your chess account or paste a game manually.
+            </p>
+
+
+            <div class="import-container">
+
+                <h3>Import from your platform</h3>
+
+
+                <!-- PLATFORM CARDS -->
+
+                <div class="platform-grid">
+
+
+                    <!-- CHESS.COM -->
+
+                    <div class="platform-card">
+
+                        <div class="platform-logo">
+                            ♟
+                        </div>
+
+                        <h3>Chess.com</h3>
+
+                        <p>
+                            Find your public game history.
+                        </p>
+
+                        <input
+                            type="text"
+                            id="chesscom-user"
+                            placeholder="Enter Chess.com username"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            onclick="loadChessCom()"
+                        >
+                            Find my games →
+                        </button>
+
+                    </div>
+
+
+                    <!-- LICHESS -->
+
+                    <div class="platform-card">
+
+                        <div class="platform-logo">
+                            ♞
+                        </div>
+
+                        <h3>Lichess</h3>
+
+                        <p>
+                            Import your Lichess games.
+                        </p>
+
+                        <input
+                            type="text"
+                            id="lichess-user"
+                            placeholder="Enter Lichess username"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            onclick="loadLichess()"
+                        >
+                            Find my games →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMPORT STATUS -->
+
+                <div
+                    id="import-status"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- GAMES LIST -->
+
+                <div id="games-list"></div>
+
+
+                <!-- SEPARATOR -->
+
+                <div class="separator">
+                    <span>OR ANALYZE MANUALLY</span>
+                </div>
+
+
+                <!-- MANUAL ANALYSIS -->
+
+                <div class="manual-analysis">
+
+                    <h3>Paste your PGN</h3>
+
+                    <p>
+                        Paste your complete chess game.
+                    </p>
+
+                    <textarea
+                        id="pgn-input"
+                        placeholder="Example:
+
+[Site &quot;Chess.com&quot;]
+[White &quot;Player1&quot;]
+[Black &quot;Player2&quot;]
+[Result &quot;1-0&quot;]
+
+1. e4 e5 2. Nf3 Nc6..."
+                    ></textarea>
+
+
+                    <h3>Or paste your FEN</h3>
+
+                    <p>
+                        Analyze a specific chess position.
+                    </p>
+
+                    <input
+                        type="text"
+                        id="fen-input"
+                        placeholder="Paste your FEN position here..."
+                    >
+
+
+                    <button
+                        type="button"
+                        class="analyze-button"
+                        onclick="analyzeManual()"
+                    >
+                        Analyze Game →
+                    </button>
+
+
+                    <p
+                        id="manual-status"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES SECTION -->
+
+        <section class="features" id="features">
+
+            <span class="tag">
+                WHAT WE OFFER
+            </span>
+
+            <h2>Everything You Need to Improve</h2>
+
+            <p>
+                Tools designed to help every chess player.
+            </p>
+
+
+            <div class="feature-grid">
+
+
+                <div class="feature-card">
+
+                    <span>♟</span>
+
+                    <h3>Move Analysis</h3>
+
+                    <p>
+                        Discover the best moves and mistakes
+                        in your games.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <span>📊</span>
+
+                    <h3>Game Statistics</h3>
+
+                    <p>
+                        Track accuracy and understand
+                        your performance.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <span>🤖</span>
+
+                    <h3>AI Coach</h3>
+
+                    <p>
+                        Get simple explanations and
+                        learn from mistakes.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <span>🎯</span>
+
+                    <h3>Personal Training</h3>
+
+                    <p>
+                        Practice positions from
+                        your own games.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT SECTION -->
+
+        <section class="about" id="about">
+
+            <span class="tag">
+                ABOUT CHESSMIND
+            </span>
+
+            <h2>Think Better. Play Better.</h2>
+
+            <p>
+                ChessMind helps players understand chess,
+                improve their decisions and become stronger.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 ChessMind. All rights reserved.
+        </p>
+
+        <p>
+            Made for chess players.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
